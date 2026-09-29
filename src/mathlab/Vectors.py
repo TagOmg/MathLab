@@ -46,7 +46,3 @@ class Vector:
        return sum(map(pow,a, [2]*len(a)))**0.5
     def normalized(self):
         return Vector([x / self.norm() for x in self.values])
-v1 = Vector([1,2])
-v2 = Vector([4,6])
-v3 = Vector([4, 3, 2])
-print(v1.normalized().norm())
