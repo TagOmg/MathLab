@@ -16,17 +16,20 @@ class Vector:
     def __len__(self):
         return len(self.values)
 
-    def __add__(self, plus):
-        if len(self.values) != len(plus.values):
+    def __add__(self, other):
+        if len(self.values) != len(other.values):
             raise ValueError('Векторы разной размерности')
+        elif  isinstance(other, Vector):
+            raise TypeError('Ожидался Vector')
 
-        return Vector([x + y for x, y in zip(self.values, plus.values)])
+        return Vector([x + y for x, y in zip(self.values, other.values)])
 
-    def __sub__(self, minus):
-        if len(self.values) != len(minus.values):
+    def __sub__(self, other):
+        if len(self.values) != len(other.values):
             raise ValueError('Векторы разной размерности')
-
-        return Vector([x - y for x, y in zip(self.values, minus.values)])
+        elif  isinstance(other, Vector):
+                    raise TypeError('Ожидался Vector')
+        return Vector([x - y for x, y in zip(self.values, other.values)])
 
     def __mul__(self, scalar):
         if not isinstance(scalar, (int, float)) or isinstance(scalar, bool) :
@@ -44,7 +47,7 @@ class Vector:
         return Vector([-x for x in self.values])
 
     def __eq__(self, other):
-        if  type(other) == list and len(self.values) == len(other.values) :            
+        if isinstance(other, Vector) and len(self.values) == len(other.values) :            
             TF = [x == y for x, y in zip(self.values, other.values)]
             return True if sum(TF) == len(TF) else False
         else : 
@@ -53,6 +56,8 @@ class Vector:
     def dot(self, other):
         if len(self.values) != len(other.values):
             raise ValueError('Векторы разной размерности')
+        elif  isinstance(other, Vector):
+                    raise TypeError('Ожидался Vector')
         return sum([x * y for x, y in zip(self.values, other.values)])
 
     def norm(self):
@@ -61,10 +66,12 @@ class Vector:
     def dist_to(self, other):
         if len(self.values) != len(other.values):
             raise ValueError('Векторы разной размерности')
+        elif  isinstance(other, Vector):
+                    raise TypeError('Ожидался Vector')
         a = [x - y for x, y in zip(self.values, other.values)]
         return sum(map(pow, a, [2] * len(a)))**0.5
 
     def normalized(self):
-        if not all(self.values):
+        if self.norm() == 0:
             raise ValueError('нулевой вектор')
         return Vector([x / self.norm() for x in self.values])
