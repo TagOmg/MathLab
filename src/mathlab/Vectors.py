@@ -19,7 +19,7 @@ class Vector:
     def __add__(self, other):
         if len(self.values) != len(other.values):
             raise ValueError('Векторы разной размерности')
-        elif  isinstance(other, Vector):
+        elif not isinstance(other, Vector):
             raise TypeError('Ожидался Vector')
 
         return Vector([x + y for x, y in zip(self.values, other.values)])
@@ -27,7 +27,7 @@ class Vector:
     def __sub__(self, other):
         if len(self.values) != len(other.values):
             raise ValueError('Векторы разной размерности')
-        elif  isinstance(other, Vector):
+        elif  not isinstance(other, Vector):
                     raise TypeError('Ожидался Vector')
         return Vector([x - y for x, y in zip(self.values, other.values)])
 
@@ -56,7 +56,7 @@ class Vector:
     def dot(self, other):
         if len(self.values) != len(other.values):
             raise ValueError('Векторы разной размерности')
-        elif  isinstance(other, Vector):
+        elif  not isinstance(other, Vector):
                     raise TypeError('Ожидался Vector')
         return sum([x * y for x, y in zip(self.values, other.values)])
 
@@ -66,7 +66,7 @@ class Vector:
     def dist_to(self, other):
         if len(self.values) != len(other.values):
             raise ValueError('Векторы разной размерности')
-        elif  isinstance(other, Vector):
+        elif  not isinstance(other, Vector):
                     raise TypeError('Ожидался Vector')
         a = [x - y for x, y in zip(self.values, other.values)]
         return sum(map(pow, a, [2] * len(a)))**0.5
