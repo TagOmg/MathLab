@@ -2,6 +2,8 @@ class Vector:
     def __init__(self, values):
         if len(values) == 0:
             raise ValueError('Пустой вектор')
+        elif not all(isinstance(x, (int, float)) and not isinstance(x, bool) for x in values):
+                    raise TypeError('Неверный тип данных')
         self.values = list(values)
 
     def __str__(self):
@@ -27,15 +29,14 @@ class Vector:
         return Vector([x - y for x, y in zip(self.values, minus.values)])
 
     def __mul__(self, scalar):
-        if not all(isinstance(x, (int, float)) and not isinstance(x, bool)
-                   for x in self.values):
+        if not isinstance(scalar, (int, float)) or isinstance(scalar, bool) :
             raise TypeError('Неверный тип')
         return Vector([x * scalar for x in self.values])
 
     def __truediv__(self, scalar):
         if scalar == 0:
             raise ZeroDivisionError('Деление на ноль')
-        elif not all(isinstance(x, (int, float)) and not isinstance(x, bool) for x in self.values):
+        elif not isinstance(scalar, (int, float)) or isinstance(scalar, bool) :
             raise TypeError('Неверный тип')
         return Vector([x / scalar for x in self.values])
 
@@ -43,10 +44,11 @@ class Vector:
         return Vector([-x for x in self.values])
 
     def __eq__(self, other):
-        if len(self.values) != len(other.values):
-            raise ValueError('Векторы разной размерности')
-        TF = [x == y for x, y in zip(self.values, other.values)]
-        return True if sum(TF) == len(TF) else False
+        if  type(other) == list and len(self.values) == len(other.values) :            
+            TF = [x == y for x, y in zip(self.values, other.values)]
+            return True if sum(TF) == len(TF) else False
+        else : 
+            return False
 
     def dot(self, other):
         if len(self.values) != len(other.values):
@@ -63,9 +65,6 @@ class Vector:
         return sum(map(pow, a, [2] * len(a)))**0.5
 
     def normalized(self):
+        if not all(self.values):
+            raise ValueError('нулевой вектор')
         return Vector([x / self.norm() for x in self.values])
-
-
-v1 = Vector([1, 2, 3])
-v2 = Vector([1, 65, 83])
-print(v1 * 3.5)
