@@ -1,8 +1,0 @@
-README.md
-pyproject.toml
-src/mathlab/Vectors.py
-src/mathlab/__init__.py
-src/mathlab.egg-info/PKG-INFO
-src/mathlab.egg-info/SOURCES.txt
-src/mathlab.egg-info/dependency_links.txt
-src/mathlab.egg-info/top_level.txt

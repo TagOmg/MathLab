@@ -79,3 +79,10 @@ class Vector:
         if self.norm() == 0:
             raise ValueError('нулевой вектор')
         return Vector([x / self.norm() for x in self.values])
+
+if __name__ == "__main__":
+    v1 = Vector([7,2,3])
+    v2 = Vector([6,3,2])
+
+    
+    print(v1.normalized())
