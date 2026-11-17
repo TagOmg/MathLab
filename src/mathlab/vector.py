@@ -36,6 +36,7 @@ class Vector:
     def __mul__(self, scalar):
         if not isinstance(scalar, (int, float)) or isinstance(scalar, bool) :
             raise TypeError('Неверный тип')
+        
         return Vector([x * scalar for x in self.values])
 
     def __truediv__(self, scalar):
@@ -52,8 +53,10 @@ class Vector:
     def __eq__(self, other):
         if isinstance(other, Vector) and len(self.values) == len(other.values) :            
             TF = [x == y for x, y in zip(self.values, other.values)]
+
             return True if sum(TF) == len(TF) else False
         else : 
+            
             return False
 
     def dot(self, other):
@@ -73,9 +76,11 @@ class Vector:
         elif len(self.values) != len(other.values):
             raise ValueError('Векторы разной размерности')
         a = [x - y for x, y in zip(self.values, other.values)]
+
         return sum(map(pow, a, [2] * len(a)))**0.5
 
     def normalized(self):
         if self.norm() == 0:
             raise ValueError('нулевой вектор')
+        
         return Vector([x / self.norm() for x in self.values])

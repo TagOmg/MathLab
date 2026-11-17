@@ -1,4 +1,4 @@
-from mathlab.Vectors import Vector
+from mathlab.vector import Vector
 import pytest
 
 def test_create():
