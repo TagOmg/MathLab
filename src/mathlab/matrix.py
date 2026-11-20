@@ -104,3 +104,13 @@ class Matrix:
             return Vector([row[0] for row in new_matrix])
         else:
             return Matrix(new_matrix)
+    def adamard(self,other):
+        new  = []
+
+        if len(self.values) != len(other.values) or len(self.values[0]) != len(other.values[0]):
+            raise ValueError('Матрицы разных размерностей')
+       
+        for index,row in enumerate(self.values):
+                new.append([x*y for x,y in zip(row,other.values[index])])
+
+        return Matrix(new)
